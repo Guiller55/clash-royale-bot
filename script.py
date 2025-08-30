@@ -28,6 +28,7 @@ while True:
         time.sleep(6) #Espera 6 segundos para encontrar partida
     except e:
         pass
+    prob = 0
     while (enpartida == True): #La primera iteracion es libre
         try:
             try:
@@ -54,12 +55,14 @@ while True:
             pa.leftClick(flecha)
             reset()
         except e:
-            if(random.randint(0,100)>30): #si no hubo flecha, hay 30% probabilidad de no clickear esta iteracion
+            if(prob%3 == 0): #si no hubo flecha, hay 30% probabilidad de no clickear esta iteracion
                 print('Clickeada carta')
                 pa.leftClick(random.randint(1262,1500), random.randint(912,979))
                 reset()
+                prob += 1
             else:
                 print('No se clickeará')
+                prob += 1
     for boton in botones: #revisa si hay volver, cerrar o vale y los clickea
         try:
             obj = pa.locateCenterOnScreen(boton, confidence=0.9)
